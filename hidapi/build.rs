@@ -11,11 +11,8 @@ const HIDAPI_DLL: &str = "hidapi.dll";
 
 fn configure_hidapi(path: &str) {
     let cwd = env::current_dir().unwrap();
-    let lib_dir = cwd
-        .join(path);
-    let target_dir = cwd
-        .join("../target")
-        .join(env::var("PROFILE").unwrap());
+    let lib_dir = cwd.join(path);
+    let target_dir = cwd.join("../target").join(env::var("PROFILE").unwrap());
     let from = lib_dir.join(HIDAPI_DLL);
     let to = target_dir.join(HIDAPI_DLL);
     if let Err(_) = fs::copy(from, to) {
@@ -33,4 +30,3 @@ fn main() {
 fn main() {
     configure_hidapi("vendor/hidapi/x86");
 }
-
